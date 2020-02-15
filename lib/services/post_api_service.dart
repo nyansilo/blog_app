@@ -8,33 +8,90 @@ import "dart:async";
 // In order for the source gen to know which file to generate and which files are "linked", you need to use the part keyword.
 part 'post_api_service.chopper.dart';
 
+//String token = "Token " + token;
+
 @ChopperApi(baseUrl: '/blog')
 abstract class PostApiService extends ChopperService {
-  @Get(path: 'blog-list')
-  Future<Response<BuiltList<BuiltPost>>> getPosts();
+  static const Map<String, String> _headers = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+  };
 
-  @Get(path: 'detail/{id}')
-  // Query parameters are specified the same way as @Path
-  // but obviously with a @Query annotation
-  // For single returned objects, response will hold only one BuiltPost
-  Future<Response<BuiltPost>> getPost(@Path('id') int id);
+  //GET ALL POSTS POST REQUEST
+  @Get(
+    path: 'blog-list',
+    headers: _headers,
+  )
+  Future<Response<BuiltList<BuiltPost>>> getPosts(
+    @Header("Authorization") String authorization,
+    @Query() int search,
+    @Query() int ordering,
+  );
 
-  // Put & Patch requests are specified the same way - they must contain the @Body
-  @Post(path: 'create')
+  //GET SINGLE POST REQUEST
+  @Get(
+    path: 'detail/{id}',
+    headers: _headers,
+  )
+
+// Query parameters are specified the same way as @Path
+// but obviously with a @Query annotation
+// For single returned objects, response will hold only one BuiltPost
+//Use the Query annotation to add query parameters to the url
+//  Future<Response> search({
+//     @Query() String name,
+//     @Query('int') int number,
+//     @Query('default_value') int def = 42,
+// });
+
+// If you prefer to pass to pass a full Map you can use the QueryMap annotation
+// Future<Response> search(@QueryMap() Map<String, dynamic> query);
+
+//{@Query('q') String path = 'flutter:featured'}
+  //{
+  //@Query() String username,
+  //@Query() int author,
+  //}
+  //@Query() int search,
+
+  //GET SINGLE POST REQUE
+  Future<Response<BuiltPost>> getPost(
+    @Header("Authorization") String authorization,
+    @Path('id') int id,
+  );
+
+  //CREATE POST REQUEST
+  @Post(
+    path: 'create',
+    headers: _headers,
+  )
   //@multipart
   Future<Response<BuiltPost>> createPost(
+    @Header("Authorization") String authorization,
     @Body() BuiltPost post,
   );
 
-  @Put(path: 'update/{id}')
+  //UPDATING POST REQUEST
+  @Put(
+    path: 'update/{id}',
+    headers: _headers,
+  )
   //@multipart
   Future<Response<BuiltPost>> updatePost(
+    @Header("Authorization") String authorization,
     @Path('id') int id,
     @Body() BuiltPost post,
   );
 
-  @Delete(path: 'delete/{id}')
-  Future<Response<BuiltPost>> deletePost(@Path('id') int id);
+  //DELETE POST REQUEST
+  @Delete(
+    path: 'delete/{id}',
+    headers: _headers,
+  )
+  Future<Response<BuiltPost>> deletePost(
+    @Header("Authorization") String authorization,
+    @Path('id') int id,
+  );
 
   static PostApiService create() {
     final client = ChopperClient(

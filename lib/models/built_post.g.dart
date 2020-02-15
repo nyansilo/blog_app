@@ -48,6 +48,18 @@ class _$BuiltPostSerializer implements StructuredSerializer<BuiltPost> {
         ..add(serializers.serialize(object.overview,
             specifiedType: const FullType(String)));
     }
+    if (object.username != null) {
+      result
+        ..add('username')
+        ..add(serializers.serialize(object.username,
+            specifiedType: const FullType(String)));
+    }
+    if (object.author != null) {
+      result
+        ..add('author')
+        ..add(serializers.serialize(object.author,
+            specifiedType: const FullType(int)));
+    }
     if (object.thumbnail != null) {
       result
         ..add('thumbnail')
@@ -88,6 +100,14 @@ class _$BuiltPostSerializer implements StructuredSerializer<BuiltPost> {
           result.overview = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'username':
+          result.username = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'author':
+          result.author = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
         case 'thumbnail':
           result.thumbnail = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -111,6 +131,10 @@ class _$BuiltPost extends BuiltPost {
   @override
   final String overview;
   @override
+  final String username;
+  @override
+  final int author;
+  @override
   final String thumbnail;
 
   factory _$BuiltPost([void Function(BuiltPostBuilder) updates]) =>
@@ -122,6 +146,8 @@ class _$BuiltPost extends BuiltPost {
       this.title,
       this.timestamp,
       this.overview,
+      this.username,
+      this.author,
       this.thumbnail})
       : super._();
 
@@ -141,6 +167,8 @@ class _$BuiltPost extends BuiltPost {
         title == other.title &&
         timestamp == other.timestamp &&
         overview == other.overview &&
+        username == other.username &&
+        author == other.author &&
         thumbnail == other.thumbnail;
   }
 
@@ -148,9 +176,15 @@ class _$BuiltPost extends BuiltPost {
   int get hashCode {
     return $jf($jc(
         $jc(
-            $jc($jc($jc($jc(0, id.hashCode), slug.hashCode), title.hashCode),
-                timestamp.hashCode),
-            overview.hashCode),
+            $jc(
+                $jc(
+                    $jc(
+                        $jc($jc($jc(0, id.hashCode), slug.hashCode),
+                            title.hashCode),
+                        timestamp.hashCode),
+                    overview.hashCode),
+                username.hashCode),
+            author.hashCode),
         thumbnail.hashCode));
   }
 
@@ -162,6 +196,8 @@ class _$BuiltPost extends BuiltPost {
           ..add('title', title)
           ..add('timestamp', timestamp)
           ..add('overview', overview)
+          ..add('username', username)
+          ..add('author', author)
           ..add('thumbnail', thumbnail))
         .toString();
   }
@@ -190,6 +226,14 @@ class BuiltPostBuilder implements Builder<BuiltPost, BuiltPostBuilder> {
   String get overview => _$this._overview;
   set overview(String overview) => _$this._overview = overview;
 
+  String _username;
+  String get username => _$this._username;
+  set username(String username) => _$this._username = username;
+
+  int _author;
+  int get author => _$this._author;
+  set author(int author) => _$this._author = author;
+
   String _thumbnail;
   String get thumbnail => _$this._thumbnail;
   set thumbnail(String thumbnail) => _$this._thumbnail = thumbnail;
@@ -203,6 +247,8 @@ class BuiltPostBuilder implements Builder<BuiltPost, BuiltPostBuilder> {
       _title = _$v.title;
       _timestamp = _$v.timestamp;
       _overview = _$v.overview;
+      _username = _$v.username;
+      _author = _$v.author;
       _thumbnail = _$v.thumbnail;
       _$v = null;
     }
@@ -231,6 +277,8 @@ class BuiltPostBuilder implements Builder<BuiltPost, BuiltPostBuilder> {
             title: title,
             timestamp: timestamp,
             overview: overview,
+            username: username,
+            author: author,
             thumbnail: thumbnail);
     replace(_$result);
     return _$result;

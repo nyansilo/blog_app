@@ -19,12 +19,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  chopper: ^2.4.2
+  chopper: ^3.0.1+1
   provider: ^3.0.0+1
   connectivity: ^0.4.3
-  built_value: ^6.8.2
+  built_value: ^7.0.3
   date_format: ^1.0.8
-  cached_network_image: 
+  cached_network_image: ^2.0.0
+  shared_preferences: ^0.5.6+1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -33,8 +34,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  chopper_generator: ^2.4.2
-  built_value_generator: ^6.8.2
+  chopper_generator: ^3.0.3
+  built_value_generator: ^7.0.3
   # No version number means the latest version
   build_runner:
 

@@ -24,6 +24,12 @@ abstract class BuiltPost implements Built<BuiltPost, BuiltPostBuilder> {
   String get overview;
 
   @nullable
+  String get username;
+
+  @nullable
+  int get author;
+
+  @nullable
   String get thumbnail;
 
   BuiltPost._();

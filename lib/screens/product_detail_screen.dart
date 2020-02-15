@@ -31,14 +31,15 @@ class ProductDetailScreen extends StatelessWidget {
             Container(
               height: 300,
               width: double.infinity,
-              child: Image.network(
-                "${loadedProduct.thumbnail}",
-                fit: BoxFit.cover,
-              ),
+              //child: Image.network(
+              // "${loadedProduct.thumbnail}",
+              //fit: BoxFit.cover,
+              //),
             ),
             SizedBox(height: 10),
             Text(
-              dateFormatter(loadedProduct.timestamp),
+              'text',
+              //dateFormatter(loadedProduct.timestamp),
               style: TextStyle(
                 color: Colors.grey,
                 fontSize: 10,

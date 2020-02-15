@@ -107,7 +107,7 @@ class ProductItem extends StatelessWidget {
                       ),
                       Spacer(),
                       Text(
-                        "category",
+                        "By: ${post.username}",
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 14.0,
